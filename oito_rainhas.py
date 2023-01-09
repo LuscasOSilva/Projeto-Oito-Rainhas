@@ -35,30 +35,35 @@ class Tabuleiro:
             for casa in linha:
                 self.item.append([int(x) for x in casa])
 
-    '''
-        Função teste apenas para retornar o a variável 
-    '''
     def retorna(self):
+        """Função teste apenas para retornar o a variável tabuleiro inteira"""
         return self.item
 
-    '''
-        Função que verifica se todos as colunas possuem 8 casas de altura,
-        se todas as linhas tem 8 casas de largura e verifica se todos os 
-        caracteres são apenas 1s e 0s
-    '''
     def verifica_entrada_val(self):
+        '''
+            Função que verifica se todos as colunas possuem 8 casas de altura,
+            se todas as linhas tem 8 casas de largura,verifica se todos os
+            caracteres são apenas 1s e 0s e se existem exatas 8 rainhas
+        '''
+        soma_uns = 0
         if len(self.item) != 8:
-            return 0
+            return -1
         for linha in self.item:
             if len(linha) != 8:
-                return 0
+                return -1
             for caracter_casa in linha:
-                if caracter_casa != 0 and caracter_casa != 1:
-                    return 0 
+                if caracter_casa == 1:
+                    soma_uns += 1
+                if caracter_casa not in [0, 1]:
+                    return -1
+        if soma_uns != 8:
+            return -1
         return 1
 
     def verificar_solucao(self):
-
+        '''VERIFICA SE A ENTRADA É VÁLIDA'''
+        if self.verifica_entrada_val() == -1:
+            return -1
         '''
             1° - Vamos percorrer todas as diagonais, começando pelas bordas sempre.
             Nessa primeira etapa vamos percorrer começando pelas bordas da direita e
@@ -127,7 +132,9 @@ class Tabuleiro:
         '''
             SOMA DIAGONAL SECUNDARIA
         '''
-        if sum(self.item[begin][end] for begin, end in zip(range(len(self.item)), range(len(self.item)-1, -1, -1))) > 1:
+        if sum(self.item[begin][end]
+                for begin, end in
+                zip(range(len(self.item)), range(len(self.item)-1, -1, -1))) > 1:
             return 0
 
         for borda_esquerda in range(1, len(self.item)-1):

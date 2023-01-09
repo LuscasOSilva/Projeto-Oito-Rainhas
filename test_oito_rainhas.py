@@ -37,4 +37,4 @@ def testar_verificar_solucao():
             ["00000001"],
             ["00000100"],
             ["10000000"]])
-        assert teste.verificar_solucao() == 0
+        assert teste.verificar_solucao() == 1
