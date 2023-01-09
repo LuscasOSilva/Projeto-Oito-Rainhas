@@ -41,7 +41,7 @@ class Tabuleiro:
 
     def verifica_entrada_val(self):
         '''
-            Função que verifica se todos as colunas possuem 8 casas de altura,
+            Função que verifica se todas as colunas possuem 8 casas de altura,
             se todas as linhas tem 8 casas de largura,verifica se todos os
             caracteres são apenas 1s e 0s e se existem exatas 8 rainhas
         '''

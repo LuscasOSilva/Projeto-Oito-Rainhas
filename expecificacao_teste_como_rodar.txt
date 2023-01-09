@@ -1,0 +1,35 @@
+Lucas de Oliveira Silva
+200022857
+
+O programa está integralmente escrito em Python.
+O arquivo oito_rainhas.py apresenta o código do módulo Tabuleiro.
+O arquivo test_oito_rainhas.py apresenta os testes realizados e que rodam o código principal.
+
+Para rodar o arquivo oito_rainhas.py, basta executá-lo no terminal usando o comando:
+$ python oito_rainhas.py
+
+Para rodar o arquivo test_oito_rainhas.py, basta executá-lo no terminal usando o comando:
+$ python test_oito_rainhas.py
+
+Para executar os testes do arquivo test_oito_rainhas.py, basta utilizar o seguinte comando no
+diretório em que esses arquivos estão contidos:
+$ pytest
+
+ou, se preferir ver os nomes dos testes executados:
+$ pytest --verbose
+
+Foram construidas 3 funções de teste, que testam as 3 funções do arquivo principal, são elas:
+testar_retorna(), testar_verifica_entrada_val() e testar_verificar_solucao()
+
+sendo que testar_retorna() era o teste que iria verificar se o tabuleiro estava sendo
+recebido corretamente.
+
+testar_verifica_entrada_val() era o teste que verificava se a entrada era válida, 
+sendo todas as colunas possuem 8 casas de altura, se todas as linhas tem 8 casas 
+de largura,verifica se todos os caracteres são apenas 1s e 0s e se existem exatas 8 rainhas
+
+e por fim temos testar_verificar_solucao() que verifica se o tabuleiro dado é uma solução
+válida para o problema das oito rainhas.
+
+Todos os testes foram devidamente testados e os erros foram arrumados ao longo da produção
+do trabalho, como visto no histórico do Git.
