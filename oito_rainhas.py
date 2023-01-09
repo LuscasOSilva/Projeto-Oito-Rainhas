@@ -56,3 +56,102 @@ class Tabuleiro:
                 if caracter_casa != 0 and caracter_casa != 1:
                     return 0 
         return 1
+
+    def verificar_solucao(self):
+
+        '''
+            1° - Vamos percorrer todas as diagonais, começando pelas bordas sempre.
+            Nessa primeira etapa vamos percorrer começando pelas bordas da direita e
+            de cima, percorrendo suas diagonais no sentido inferior direito.
+            exemplo:
+
+             →  →  →  →  →  →  →
+            ↑0, 0, 0, 0, 0, 0, 0, 0
+            ↑0, 0, 0, 0, 0, 0, 0, 0
+            ↑0, 0, 0, 0, 0, 0, 0, 0
+            ↑0, 0, 0, 0, 0, 0, 0, 0
+            ↑0, 0, 0, 0, 0, 0, 0, 0
+            ↑0, 0, 0, 0, 0, 0, 0, 0
+            ↑0, 0, 0, 0, 0, 0, 0, 0
+             0, 0, 0, 0, 0, 0, 0, 0
+        '''
+        for borda_direita in range(len(self.item)-2, 0, -1):
+            soma = 0
+            for indice in range(0, 7):
+                soma += self.item[borda_direita+indice][indice]
+                if borda_direita+indice == 7:
+                    break
+            if soma > 1:
+                return 0
+
+        '''
+            SOMA DIAGONAL PRINCIPAL
+        '''
+        if sum(self.item[meio][meio] for meio in range(len(self.item))) > 1:
+            return 0
+
+        for borda_superior in range(1, len(self.item)-1):
+            soma = 0
+            for indice in range(0, 7):
+                soma += self.item[indice][borda_superior+indice]
+                if borda_superior+indice == len(self.item)-1:
+                    break
+            if soma > 1:
+                return 0
+
+        '''
+            2° - Vamos percorrer todas as diagonais, começando pelas bordas sempre.
+            Nessa segunda etapa vamos percorrer as bordas de cima e
+            da esquerda, percorrendo suas diagonais no sentido inferior esquerdo.
+            exemplo:
+
+               →  →  →  →  →  →  →
+            0, 0, 0, 0, 0, 0, 0, 0↓
+            0, 0, 0, 0, 0, 0, 0, 0↓
+            0, 0, 0, 0, 0, 0, 0, 0↓
+            0, 0, 0, 0, 0, 0, 0, 0↓
+            0, 0, 0, 0, 0, 0, 0, 0↓
+            0, 0, 0, 0, 0, 0, 0, 0↓
+            0, 0, 0, 0, 0, 0, 0, 0↓
+            0, 0, 0, 0, 0, 0, 0, 0↓
+        '''
+        for borda_superior in range(1, len(self.item)-1):
+            soma = 0
+            for indice in range(0, 7):
+                soma += self.item[indice][borda_superior-indice]
+                if borda_superior-indice == 0 or indice == len(self.item)-1:
+                    break
+            if soma > 1:
+                return 0
+
+        '''
+            SOMA DIAGONAL SECUNDARIA
+        '''
+        if sum(self.item[begin][end] for begin, end in zip(range(len(self.item)), range(len(self.item)-1, -1, -1))) > 1:
+            return 0
+
+        for borda_esquerda in range(1, len(self.item)-1):
+            soma = 0
+            for indice in range(0, 7):
+                soma += self.item[borda_esquerda+indice][7-indice]
+                if borda_esquerda+indice == len(self.item)-1:
+                    break
+            if soma > 1:
+                return 0
+
+        '''
+            Aqui vamos verificar se existe só 1 rainha em todas as linhas e todas as colunas
+        '''
+        for indice1 in range(len(self.item)):
+            soma_linha = 0
+            soma_coluna = 0
+            for indice2 in range(len(self.item)):
+                soma_linha += self.item[indice1][indice2]
+                soma_coluna += self.item[indice2][indice1]
+            if soma_coluna > 1 or soma_linha > 1:
+                return 0
+
+        '''
+            Se tudo estiver passado, retorna 1, que significa correto
+        '''
+        return 1
